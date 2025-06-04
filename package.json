@@ -1,0 +1,32 @@
+{
+  "name": "typescript-training",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "tsx src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MicronGit/typescript-training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MicronGit/typescript-training/issues"
+  },
+  "homepage": "https://github.com/MicronGit/typescript-training#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.1"
+  }
+}
