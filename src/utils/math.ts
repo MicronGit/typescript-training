@@ -24,5 +24,5 @@ export function multiply(a: number, b: number): number {
  * @returns 逆順にした文字列
  */
 export function reverseString(str: string): string {
-  return str.split('').reverse().join('');
+  return str.split("").reverse().join("");
 }

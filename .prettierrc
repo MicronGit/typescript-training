@@ -5,5 +5,23 @@
   "printWidth": 100,
   "tabWidth": 2,
   "endOfLine": "auto",
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "css",
+  "quoteProps": "as-needed",
+  "embeddedLanguageFormatting": "auto",
+  "bracketSameLine": false,
+  "proseWrap": "preserve",
+  "vueIndentScriptAndStyle": false,
+  "singleAttributePerLine": false,
+  "insertPragma": false,
+  "requirePragma": false,
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "bracketSpacing": true
+      }
+    }
+  ]
 }
