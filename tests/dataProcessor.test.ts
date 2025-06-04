@@ -7,6 +7,7 @@ import {
   assignUserToProject,
   calculateDepartmentBudgetUtilization,
   findUsersByDepartment,
+  generateProjectReport,
   getUsersByAgeRange,
 } from '../src/utils/dataProcessor';
 
@@ -264,26 +265,19 @@ describe('高度なデータ処理の問題', () => {
   });
 
   //   // 問題5: プロジェクトレポートを生成する関数
+  test('問題5: generateProjectReport - プロジェクトの詳細レポートを生成', () => {
+    const report = generateProjectReport(projects[0], departments, users);
 
-  //   it('問題5: generateProjectReport - プロジェクトの詳細レポートを生成', () => {
-  //     const report = generateProjectReport(projects[0], departments, users);
-
-  //     // レポートに正しい情報が含まれているか確認
-  //     expect(report.projectName).toBe('ウェブサイトリニューアル');
-
-  //     expect(report.departmentName).toBe('開発部');
-
-  //     expect(report.teamMembers.length).toBe(2);
-
-  //     expect(report.teamMembers.map(m => m.name)).toContain('山田太郎');
-
-  //     expect(report.teamMembers.map(m => m.name)).toContain('田中誠');
-
-  //     expect(report.duration).toBe(171); // プロジェクト期間の日数（端数は四捨五入）
-  //     expect(report.status).toBe('active');
-
-  //     expect(report.budgetAllocation).toBe(2000000);
-  //   });
+    // レポートに正しい情報が含まれているか確認
+    expect(report.projectName).toBe('ウェブサイトリニューアル');
+    expect(report.departmentName).toBe('開発部');
+    expect(report.teamMembers.length).toBe(2);
+    expect(report.teamMembers.map(m => m.name)).toContain('山田太郎');
+    expect(report.teamMembers.map(m => m.name)).toContain('田中誠');
+    expect(report.duration).toBe(171); // プロジェクト期間の日数（端数は四捨五入）
+    expect(report.status).toBe('active');
+    expect(report.budgetAllocation).toBe(2000000);
+  });
 
   //   // 問題6: 期間が重複するプロジェクトを検索する関数
 

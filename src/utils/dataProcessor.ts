@@ -160,3 +160,33 @@ export const calculateDepartmentBudgetUtilization = (
       utilizationPercentage: (projects.find(p => p.departmentId === d.id)!.budget / d.budget) * 100,
     };
   });
+
+export const generateProjectReport = (
+  project: Project,
+  departments: Department[],
+  users: User[]
+): Report => {
+  return {
+    projectName: project.name,
+    departmentName: departments.find(d => d.id === project.departmentId)!.name,
+    teamMembers: project.members.map(memberId => {
+      const user = users.find(u => u.id === memberId);
+      return {
+        id: user!.id,
+        name: user!.name,
+        role: 'developer', // ここは実際のロールに応じて変更可能
+      };
+    }),
+    duration: project.endDate
+      ? Math.ceil(
+          (new Date(project.endDate).getTime() - new Date(project.startDate).getTime()) /
+            (1000 * 60 * 60 * 24)
+        )
+      : 0,
+    status: project.status,
+    budgetAllocation: project.budget,
+    startDate: project.startDate,
+    endDate: project.endDate,
+    completionPercentage: project.endDate ? 100 : undefined, // 完了率はプロジェクトの状態に応じて設定
+  };
+};
