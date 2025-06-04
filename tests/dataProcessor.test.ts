@@ -5,6 +5,7 @@ import {
   Project,
   User,
   assignUserToProject,
+  calculateDepartmentBudgetUtilization,
   findUsersByDepartment,
   getUsersByAgeRange,
 } from '../src/utils/dataProcessor';
@@ -199,7 +200,6 @@ describe('高度なデータ処理の問題', () => {
     ];
   });
 
-  // 問題1: 部署に所属するユーザーを検索する関数
   test('問題1: findUsersByDepartment - 指定された部署に所属するすべてのユーザーを返す', () => {
     const devUsers = findUsersByDepartment(users, 'dev');
     expect(devUsers.length).toBe(2);
@@ -213,7 +213,6 @@ describe('高度なデータ処理の問題', () => {
     expect(nonExistentDeptUsers.length).toBe(0);
   });
 
-  // 問題2: 年齢範囲でユーザーをフィルタリングする関数
   test('問題2: getUsersByAgeRange - 指定された年齢範囲のユーザーを返す', () => {
     const youngUsers = getUsersByAgeRange(users, 20, 30);
     expect(youngUsers.length).toBe(2);
@@ -233,7 +232,6 @@ describe('高度なデータ処理の問題', () => {
     expect(exactAgeUsers[0].id).toBe(1);
   });
 
-  //   // 問題3: ユーザーをプロジェクトにアサインする関数
   test('問題3: assignUserToProject - ユーザーをプロジェクトに割り当てる', () => {
     // 新しいメンバーをプロジェクトに追加
     const updatedProjects = assignUserToProject(projects, 2, 'p1');
@@ -250,25 +248,20 @@ describe('高度なデータ処理の問題', () => {
     expect(() => assignUserToProject(projects, 1, 'nonexistent')).not.toThrow();
   });
 
-  //   // 問題4: 部署の予算使用率を計算する関数
+  test('問題4: calculateDepartmentBudgetUtilization - 部署ごとのプロジェクト予算使用率を計算', () => {
+    const budgetUtilization = calculateDepartmentBudgetUtilization(departments, projects);
 
-  //   it('問題4: calculateDepartmentBudgetUtilization - 部署ごとのプロジェクト予算使用率を計算', () => {
-  //     const budgetUtilization = calculateDepartmentBudgetUtilization(departments, projects);
+    // 開発部: プロジェクト予算 5,000,000円のうち、2つのプロジェクト（p1: 2,000,000 ）で2,000,000円使用 = 40%
+    expect(budgetUtilization.find(b => b.departmentId === 'dev')?.utilizationPercentage).toBe(40);
 
-  //     // 開発部: プロジェクト予算 5,000,000円のうち、2つのプロジェクト（p1: 2,000,000 + p4: 3,000,000）で5,000,000円使用 = 100%
+    // マーケティング部: 予算 3,000,000円のうち、1つのプロジェクト（p2: 1,500,000）で1,500,000円使用 = 50%
+    expect(budgetUtilization.find(b => b.departmentId === 'marketing')?.utilizationPercentage).toBe(
+      50
+    );
 
-  //     expect(budgetUtilization.find(b => b.departmentId === 'dev')?.utilizationPercentage).toBe(100);
-
-  //     // マーケティング部: 予算 3,000,000円のうち、1つのプロジェクト（p2: 1,500,000）で1,500,000円使用 = 50%
-
-  //     expect(budgetUtilization.find(b => b.departmentId === 'marketing')?.utilizationPercentage).toBe(
-  //       50
-  //     );
-
-  //     // 全ての部署が結果に含まれていることを確認
-
-  //     expect(budgetUtilization.length).toBe(departments.length);
-  //   });
+    // 全ての部署が結果に含まれていることを確認
+    expect(budgetUtilization.length).toBe(departments.length);
+  });
 
   //   // 問題5: プロジェクトレポートを生成する関数
 

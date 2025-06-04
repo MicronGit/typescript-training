@@ -146,3 +146,17 @@ export const assignUserToProject = (
     return project;
   });
 };
+
+export const calculateDepartmentBudgetUtilization = (
+  departments: Department[],
+  projects: Project[]
+): BudgetUtilization[] =>
+  departments.map(d => {
+    return {
+      departmentId: d.id,
+      departmentName: d.name,
+      totalBudget: d.budget,
+      usedBudget: projects.find(p => p.departmentId === d.id)!.budget,
+      utilizationPercentage: (projects.find(p => p.departmentId === d.id)!.budget / d.budget) * 100,
+    };
+  });
