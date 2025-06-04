@@ -1,3 +1,4 @@
+import { areIntervalsOverlapping } from 'date-fns';
 /**
  * このファイルにはデータ操作関連の関数を実装してください。
  * 要件はテストファイルを参照してください。
@@ -189,4 +190,24 @@ export const generateProjectReport = (
     endDate: project.endDate,
     completionPercentage: project.endDate ? 100 : undefined, // 完了率はプロジェクトの状態に応じて設定
   };
+};
+
+export const findOverlappingProjects = (projects: Project[], projectId: string): Project[] => {
+  const targetProject = projects.find(p => p.id === projectId);
+  if (!targetProject) throw new Error('Project not found');
+  return projects.filter(p => {
+    return (
+      p.id !== projectId &&
+      areIntervalsOverlapping(
+        {
+          start: new Date(p.startDate),
+          end: p.endDate ? new Date(p.endDate) : new Date(),
+        },
+        {
+          start: new Date(targetProject.startDate),
+          end: targetProject.endDate ? new Date(targetProject.endDate) : new Date(),
+        }
+      )
+    );
+  });
 };

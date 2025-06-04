@@ -6,6 +6,7 @@ import {
   User,
   assignUserToProject,
   calculateDepartmentBudgetUtilization,
+  findOverlappingProjects,
   findUsersByDepartment,
   generateProjectReport,
   getUsersByAgeRange,
@@ -280,21 +281,18 @@ describe('高度なデータ処理の問題', () => {
   });
 
   //   // 問題6: 期間が重複するプロジェクトを検索する関数
+  test('問題6: findOverlappingProjects - 指定したプロジェクトと期間が重複する他のプロジェクトを検索', () => {
+    // p1 (2023-01-10 to 2023-06-30) と重複するプロジェクト
+    const overlappingWithP1 = findOverlappingProjects(projects, 'p1');
+    expect(overlappingWithP1.length).toBe(5); // p2, p3, p4, p5, p6 と重複
 
-  //   it('問題6: findOverlappingProjects - 指定したプロジェクトと期間が重複する他のプロジェクトを検索', () => {
-  //     // p1 (2023-01-10 to 2023-06-30) と重複するプロジェクト
-  //     const overlappingWithP1 = findOverlappingProjects(projects, 'p1');
+    // p3 (2022-11-01 to 2023-03-31) と重複するプロジェクト
+    const overlappingWithP3 = findOverlappingProjects(projects, 'p3');
+    expect(overlappingWithP3.length).toBe(4); // p1, p2, p5, p6 と重複
 
-  //     expect(overlappingWithP1.length).toBe(4); // p2, p4, p5, p6 と重複
-
-  //     // p3 (2022-11-01 to 2023-03-31) と重複するプロジェクト
-  //     const overlappingWithP3 = findOverlappingProjects(projects, 'p3');
-
-  //     expect(overlappingWithP3.length).toBe(3); // p1, p2, p5 と重複
-
-  //     // 存在しないプロジェクトの場合
-  //     expect(() => findOverlappingProjects(projects, 'nonexistent')).toThrow();
-  //   });
+    // 存在しないプロジェクトの場合
+    expect(() => findOverlappingProjects(projects, 'nonexistent')).toThrow();
+  });
 
   //   // 問題7: プロジェクトのタイムラインを取得する関数
 
