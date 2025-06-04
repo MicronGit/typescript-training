@@ -29,7 +29,7 @@
     "@types/node": "^22.15.29",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
-    "eslint": "^8.53.0",
+    "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
     "prettier": "^3.5.3",
@@ -37,5 +37,8 @@
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.2.1"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
   }
 }
