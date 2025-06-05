@@ -10,7 +10,7 @@ import {
   findUsersByDepartment,
   generateProjectReport,
   getUsersByAgeRange,
-} from '../src/utils/dataProcessor';
+} from '../../src/utils/dataProcessor';
 
 describe('高度なデータ処理の問題', () => {
   // テストデータ
