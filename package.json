@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "db:up": "cd ./database/local && docker-compose up -d",
+    "db:up": "cd ./database/local && docker-compose up",
     "db:logs": "cd ./database/local && docker-compose logs",
     "db:down": "cd ./database/local && docker-compose down",
     "db:clean": "cd ./database/local && docker-compose down -v"
