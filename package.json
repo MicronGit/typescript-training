@@ -11,7 +11,11 @@
     "start": "tsx src/index.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "db:up": "cd ./database/local && docker-compose up -d",
+    "db:logs": "cd ./database/local && docker-compose logs",
+    "db:down": "cd ./database/local && docker-compose down",
+    "db:clean": "cd ./database/local && docker-compose down -v"
   },
   "repository": {
     "type": "git",
@@ -37,8 +41,5 @@
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.2.1"
-  },
-  "dependencies": {
-    "date-fns": "^4.1.0"
   }
 }
